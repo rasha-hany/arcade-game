@@ -1,10 +1,7 @@
-let st = true;
-//apend the score to the screen and wining 
-let LifeDiv = document.querySelector('.life');
-let winDiv = document.querySelector('.Wins');
-LifeDiv.innerHTML = 'You have ( 5 ) Lives ' ;
-winDiv.innerHTML = 'You Won ( 0 ) Times ';
+// Sets an initial player score of 0.
+var score = 0;
 
+document.getElementById('playerScore').innerHTML = score;
 
 
 // Enemies our player must avoid
@@ -39,11 +36,17 @@ Enemy.prototype.update = function(dt) {
 	   player.y + 60 > this.y) {
 	   player.x = 202;
 	   player.y = 405;
+         score = 0;
+		document.getElementById('playerScore').innerHTML = score;
+		player.reset();
+    
     }	
+   
+    
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
-}
+};
 
 // Draw the enemy on the screen, required method for game
 
@@ -54,12 +57,20 @@ Enemy.prototype.render = function() {
 var player = function(x, y) {
 	this.x = x;
 	this.y = y;
-	this.player = 'images/char-pink-girl.png'
+	this.player = 'images/char-princess-girl.png'
 }
 // Now write your own player class
 
 player.prototype.update = function (dt) {
+    
+    // If the player reaches the water
+    
+        if (player.y < 10) {
+	score++;
+	document.getElementById('playerScore').innerHTML = score;
+	this.reset();
 	
+  }
 }
 
 player.prototype.render = function() {
@@ -90,6 +101,8 @@ player.prototype.handleInput = function (keyPress) {
 		}, 600);
 	}
 }
+
+
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player

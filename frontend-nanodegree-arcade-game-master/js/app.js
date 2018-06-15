@@ -1,3 +1,12 @@
+let st = true;
+//apend the score to the screen and wining 
+let LifeDiv = document.querySelector('.life');
+let winDiv = document.querySelector('.Wins');
+LifeDiv.innerHTML = 'You have ( 5 ) Lives ' ;
+winDiv.innerHTML = 'You Won ( 0 ) Times ';
+
+
+
 // Enemies our player must avoid
 var Enemy = function(x, y, speed) {
 	this.x = x;
@@ -21,22 +30,20 @@ Enemy.prototype.update = function(dt) {
 	
 	if(this.x > 510) {	
 		this.x = -50;
-	    this.speed = 100 +Math.floor(Math.random() * 222);
-	
+	    this.speed = 100 + Math.floor(Math.random() * 222);
+ }
+    
 	if (player.x < this.x + 80 &&
 	   player.x + 80 > this.x &&
 	   player.y < this.y + 60 &&
 	   player.y + 60 > this.y) {
 	   player.x = 202;
 	   player.y = 405;
-    }
-	
- }
-		
+    }	
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
-};
+}
 
 // Draw the enemy on the screen, required method for game
 
@@ -55,14 +62,14 @@ player.prototype.update = function (dt) {
 	
 }
 
-player.prototype.render = function () {
+player.prototype.render = function() {
 	ctx.drawImage(Resources.get(this.player), this.x, this.y);
-}
+};
 // This class requires an update(), render() and
 
 // a handleInput() method.
  
-player.prototype.handleInput = function (keypress) {
+player.prototype.handleInput = function (keyPress) {
     
 	if (keyPress == 'left' && this.x > 0) {
 		this.x -= 102;
@@ -71,10 +78,10 @@ player.prototype.handleInput = function (keypress) {
 		this.x += 102;
 	}
 	if (keyPress == 'up' && this.y > 0) {
-		this.x -= 83;
+		this.y -= 83;
 	}
 	if (keyPress == 'down' && this.y < 405) {
-		this.x += 83;
+		this.y += 83;
 	}
 	if (this.y < 0) {
 		setTimeout(function () {
